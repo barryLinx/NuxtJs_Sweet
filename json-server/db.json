@@ -1,0 +1,35 @@
+{
+  "product":[
+    {
+      "name":"焦糖馬卡龍",
+      "price":900,
+      "img":"prod1"      
+    },
+    {
+      "name":"草莓派",
+      "price":900,
+      "img":"prod2"      
+    },
+    {
+      "name":"葡萄蛋糕",
+      "price":45,
+      "img":"prod3"      
+    },
+    {
+      "name":"水果盒子",
+      "price":1800,
+      "img":"prod4"      
+    },
+    {
+      "name":"甜甜圈",
+      "price":90,
+      "img":"prod5"      
+    }   
+   
+  ],
+  "user":{
+    "email":"",
+    "password":"sdfdsf"
+  }
+  
+}
