@@ -1,5 +1,5 @@
 <template>
-  <section class="cart-page" >
+  <section class="cart-page" :class="{'cart-empty':cartData.length === 0}" >
       <div class="cart-currently">
           <h3>您的購物車</h3>
           <ul class="cart">
@@ -21,7 +21,7 @@
                 </div>
            
               <div class="price-trash">
-                <div class="price">
+                <div class="price">u
                   NT$ {{item.subtotal}} 
                 </div>
                 <button class="trash" @click.prevent="AllRemoveCartItem(item)">
@@ -67,7 +67,7 @@ export default {
   data(){
     return{
       cartData:[],
-      buyPay:{}    
+      //cartEmpty:false    
    }
  },
  created(){
