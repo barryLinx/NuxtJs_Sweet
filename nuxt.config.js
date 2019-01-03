@@ -29,14 +29,17 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '~assets/css/all.css'
+    '~assets/css/all.css',
+    'element-ui/lib/theme-chalk/index.css'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~plugins/vee-validate'
+    '~plugins/vee-validate',
+     //'~plugins/element-ui',
+
   ],
 
   /*
@@ -59,6 +62,7 @@ module.exports = {
     position: 'top-right',
     theme: "bubble",
     duration : 3000,
+    iconPack : 'material'
   },
 
   /*
@@ -69,7 +73,7 @@ module.exports = {
     ** You can extend webpack config here
     */
    vendor: ['veevalidate'],
-
+   //vendor: ['element-ui'],
     extend(config, ctx) {
       
     }

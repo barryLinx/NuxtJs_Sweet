@@ -89,15 +89,17 @@ export default {
       return{
         proddata:[
           //假資料
-          {"title":"頻果派","price":450,"imgname":"prod1"},
-          {"title":"藍梅派","price":950,"imgname":"prod2"},
-          {"title":"焦糖馬卡籠","price":650,"imgname":"prod3"},
+          { id: 1, title: '頻果派', price: 450, imgname: 'prod1', tag: 'Today' },
+        {id: 2,title: '藍梅派',price: 950,imgname: 'prod2',tag: 'recommend'},
+        {id: 3,title: '焦糖馬卡籠',price: 650,imgname: 'prod3',tag: 'newProduct'},
         ],
         FavoriteProd:[],
       }
     },
     created(){
+      // this.getBuycart();
        this.getFavoriteProd();
+      
     },
     watch:{
       FavoriteProd(){
@@ -106,6 +108,7 @@ export default {
       }
     },
     methods:{
+            
       getFavoriteProd(){
          const vm = this;
          //console.log(localStorage.FavoriteProd);

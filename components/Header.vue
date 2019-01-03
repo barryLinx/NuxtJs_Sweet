@@ -23,8 +23,10 @@
             </li>
           </ul>                    
        
-        <div class="cart">
-          <nuxt-link to="/cart"><i class="fas fa-shopping-cart"></i></nuxt-link>
+        <div class="cart"  @click="routeclick('cart')">
+          <nuxt-link to="/cart"><i class="fas fa-shopping-cart"></i>
+          {{vxCart.length }}
+          </nuxt-link>
          
         </div>
         <div class="menu-btn" @click="showMenu" :class="{'close':show}">
@@ -50,19 +52,39 @@
 </template>
 
 <script>
+import { mapState,mapMutations,mapActions,mapGetters } from 'vuex';
   export default{
    
     data(){
       return{
        // navitem:['index','product','login'],
-        routeName:'',
-        show:false,  
+        routeName:'index',
+        show:false,
+        BowerCart:[],
       }
     },
     created(){
-       this.routeName = 'index';
+       //this.routeName = 'index';
+       this.getBuycart();
     },
     methods:{
+       getBuycart(){
+         const vm = this;           
+          if (process.client) {  
+             //require('external_library')
+            // console.log(localStorage.FavoriteProd);
+            if(window.localStorage){
+              let arrdata =  JSON.parse(window.localStorage.getItem('clientCart'));
+               console.log('arrdata',arrdata);
+               if(arrdata !== null && arrdata.lenth !== 0){
+               //vm.BowerCart =  arrdata;
+                 this.$store.dispatch('cartModules/getclientcart', arrdata);
+               }
+            //vm.BowerCart = JSON.parse(window.localStorage.getItem('clientCart'));
+            }          
+          }
+      },          
+      
       routeclick(activeName){
         const vm = this;
         this.routeName = activeName;
@@ -72,6 +94,17 @@
         this.show = !this.show;
       }
 
+    },
+    computed:{
+      ...mapState("cartModules",["vxCart"]),
+      // cartlenth(){
+      //   const vm = this;
+       
+      //  console.log('vxCart',this.vxCart);
+      //   vm.BowerCart = this.vxCart;
+      //     console.log('BowerCart',this.BowerCart);
+      //   return vm.BowerCart.length;
+      // }
     }
   }
 </script>
