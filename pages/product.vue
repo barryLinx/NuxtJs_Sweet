@@ -232,7 +232,7 @@ export default {
     selectMenu() {},
     handleCurrentChange(val){
       this.currentPage = val;
-       console.log('目前頁',val);
+      // console.log('目前頁',val);
     }
   },
   computed: {
