@@ -109,7 +109,7 @@ const mutations = {
         return e.id  == payload.id;
       });
       state.vxCart.splice(del,1);
-      console.log('state_vxCart',state.vxCart.length);      
+     // console.log('state_vxCart',state.vxCart.length);      
     };
   },
 

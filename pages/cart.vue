@@ -103,7 +103,7 @@ export default {
   additem(objItem){
           const vm = this;      
           delete objItem.len;
-           console.log('objItem' ,objItem);   
+          // console.log('objItem' ,objItem);   
            vm.$store.dispatch('cartModules/AddCartAction',objItem);
             
           if (process.client) {
@@ -122,7 +122,7 @@ export default {
                localStorage.setItem("clientCart", JSON.stringify(this.vxCart));
                //this.$toast.success('已放入購物車!!');     
           }
-        console.log('Index',del);
+       // console.log('Index',del);
     },
     AllRemoveCartItem(objItem){
       this.$store.dispatch('cartModules/allremoveCartItemAction',{id:objItem.id,len:objItem.len});
