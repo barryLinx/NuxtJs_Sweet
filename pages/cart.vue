@@ -21,7 +21,7 @@
                 </div>
            
               <div class="price-trash">
-                <div class="price">u
+                <div class="price">
                   NT$ {{item.subtotal}} 
                 </div>
                 <button class="trash" @click.prevent="AllRemoveCartItem(item)">
