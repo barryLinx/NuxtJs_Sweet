@@ -59,7 +59,7 @@ export default {
        this.$validator.validateAll().then((result) => {
         if (result) {
           // eslint-disable-next-line
-        console.log('result',result);
+        //console.log('result',result);
          this.$toast.success('登入成功!!', { 
               position: "top-center", 
               theme: "outline",   

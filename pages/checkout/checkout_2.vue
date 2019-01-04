@@ -16,39 +16,46 @@
                 <div class="form-row ">
                   <div class="col-12">
                     <label for="">信用卡卡號</label>
-                    <input v-model="from.payway.credit"  v-validate="'credit_card'" type="" name="credit"  placeholder="9012-3456-7890-1234">
+                    <input v-model="from.payway.credit"  v-validate="'credit_card'" type="" name=">信用卡"  placeholder="9012-3456-7890-1234">
+                    <span v-show="errors.has('>信用卡')">{{ errors.first('信用卡') }}</span> 
                   </div>
                 </div>
                 <label for="">持卡人姓名</label>
                 <div class="form-row form-mr-4">
                   <div class="col-6 ">
-                    <input type="text" v-model="from.payway.credit_name"  v-validate="'required'"  placeholder="小明">
+                    <input type="text" name="持卡人姓氏" v-model="from.payway.credit_name"  v-validate="'required'"  placeholder="小明">
+                    <span v-show="errors.has('持卡人姓氏')">{{ errors.first('持卡人姓氏') }}</span> 
                   </div>
                   <div class="col-6 ">
-                    <input type="text" v-model="from.payway.credit_name_first" v-validate="'required'"  placeholder="王">
+                    <input type="text" name="持卡人姓名" v-model="from.payway.credit_name_first" v-validate="'required'"  placeholder="王">
+                    <span v-show="errors.has('持卡人姓名')">{{ errors.first('持卡人姓名') }}</span>
                   </div>
                 </div>
                 <label for="">有效期限</label>              
                 <div class="form-row form-mr-4">
                   <div class="col-6 ">
-                    <select v-validate="'required'" v-model="from.payway.limit_mth
+                    <select v-validate="'required'" name="月份" v-model="from.payway.limit_mth
                     ">
                       <option value="audi">月</option>
-                      <option value="audi">01</option>
-                      <option value="mercedes">02</option>
-                      <option value="mercedes">03</option>
+                      <option value="1">01</option>
+                      <option value="2">02</option>
+                      <option value="3">03</option>
                     </select>
+                     <span v-show="errors.has('月份')">{{ errors.first('月份') }}</span>
                   </div>
                   <div class="col-6">
-                    <select v-validate="'required'" v-model="from.payway.limit_year">
+                    <select v-validate="'required'" name="年份" v-model="from.payway.limit_year">
                       <option value="volvo">年</option>
+                      <option value="2007">2007</option>
                     </select>
+                     <span v-show="errors.has('年份')">{{ errors.first('年份') }}</span>
                   </div> 
                 </div>
                 <div class="form-row">
                     <div class="col-6 ">
                         <label for="three">背面末三碼</label>
-                      <input type="number" name="three" v-model="from.payway.credit_number" v-validate="'required'"  placeholder="123">
+                      <input type="number" name="末三碼" v-model="from.payway.credit_number" v-validate="'required'"  placeholder="123">
+                        <span v-show="errors.has('末三碼')">{{ errors.first('末三碼') }}</span>
                     </div>             
                   </div>
               </form>

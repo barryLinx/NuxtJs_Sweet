@@ -29,7 +29,7 @@
               <div class="form-row ">
                 <div class="col-12">
                   <label for="tel">電話</label>
-                  <input type="tel"  v-model="from.transfrom.tel"  v-validate="'required'" name="電話"  placeholder="0912-345-678">
+                  <input type="tel"  v-model="from.transfrom.tel"  v-validate="'required|'" name="電話"  placeholder="0912-345-678">
                   <span v-show="errors.has('電話')">{{ errors.first('電話') }}</span>
                 </div>
               </div>
@@ -130,11 +130,27 @@ export default {
       this.$validator.validateAll().then((result) => {
         if (result) {
           // eslint-disable-next-line          
-          alert('Form Submitted!');
+          this.$toast.success('填寫成功!!', { 
+              position: "top-center", 
+              theme: "outline",   
+              duration : 3000,
+               icon : {
+                name : 'check',
+                after : false // this will append the icon to the end of content
+               }
+            });
            vm.$router.push('/checkout/checkout_2');
           return;
         }
-        alert('Correct them errors!');
+         this.$toast.error('請填入資訊!!', { 
+              position: "top-center", 
+	            theme: "outline", 	         
+              duration : 2000,            
+              icon : {
+                name : 'error',
+                after : false // this will append the icon to the end of content
+               }
+            });
       });
     }
   },

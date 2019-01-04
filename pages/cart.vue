@@ -1,5 +1,5 @@
 <template>
-  <section class="cart-page" :class="{'cart-empty':cartData.length === 0}" >
+  <section class="cart-page" :class="{'cart-empty':cartData.length < 2 }" >
       <div class="cart-currently">
           <h3>您的購物車</h3>
           <ul class="cart">
@@ -72,6 +72,9 @@ export default {
  },
  created(){
    //this.accCartData();
+ },
+ filters:{
+
  },
  methods: {
  accCartData(){   

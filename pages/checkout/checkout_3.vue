@@ -14,14 +14,14 @@
             </div>
             <form class="checkout-body">
                 <div class="invoice">     
-                  <div class="invoice-pill col-12">
-                      <p  href="">電子發票</p>
+                  <div class="invoice-pill col-12" :class="{'invoice-active': invoiceName == 'electronic'}"  @click="invoiceName='electronic'">
+                      <p>電子發票</p>
                   </div>               
-                  <div class="invoice-pill col-12 invoice-active">
-                      <p  href="">郵寄發票</p>
+                  <div class="invoice-pill col-12 " :class="{'invoice-active': invoiceName == 'Mailing'}" @click="invoiceName='Mailing'">
+                      <p >郵寄發票</p>
                   </div>                     
                 </div>
-                <div class="Mailing">
+                <div class="Mailing" :class="{'active':invoiceName == 'Mailing'}">
                     <label for="">地址</label>
                     <div class="form-row form-mr-4">
                       <div class="col-6 ">
@@ -45,12 +45,12 @@
                       <input type="" name="" value="" placeholder="幸福路 520 號">
                     </div>
                 </div>
-                <!-- <div class="electronic">
+                <div class="electronic"  :class="{'active':invoiceName == 'electronic'}">
                     <label for="">電子郵件信箱</label>
                     <div class="form-row">
                         <input type="" name="" value="" placeholder="example@email.com">
                       </div>
-                </div> -->
+                </div>
                 <label for="">統一編號（選填）</label>  
                   <div class="form-row">
                     <input type="" name="" value="" placeholder="12345678">
@@ -116,7 +116,8 @@ export default {
       from:{
        invoice:{
         }
-      }
+      },
+      invoiceName:'electronic'
     }
   },
  methods: {
