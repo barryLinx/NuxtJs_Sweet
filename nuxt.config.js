@@ -39,7 +39,6 @@ module.exports = {
   plugins: [
     '~plugins/vee-validate',
      //'~plugins/element-ui',
-
   ],
 
   /*

@@ -21,45 +21,70 @@
                       <p >郵寄發票</p>
                   </div>                     
                 </div>
-                <div class="Mailing" :class="{'active':invoiceName == 'Mailing'}">
+                <div class="Mailing" v-show="invoiceName == 'Mailing'" :class="{'active':invoiceName == 'Mailing'}">
                     <label for="">地址</label>
                     <div class="form-row form-mr-4">
-                      <div class="col-6 ">
-                        <select>
-                          <option value="audi">新竹市</option>
-                          <option value="mercedes">嘉義市</option>
-                          <option value="saab">台南市</option>
-                          <option selected value="volvo">高雄市</option>
+                      <div class="col-6 validate-tooltip" >
+                        <select v-model="from.invoice.county" name="城市" v-if="invoiceName == 'Mailing'" v-validate="'required'">
+                          <option value="">請選擇</option>
+                          <option value="新竹市">新竹市</option>
+                          <option value="嘉義市">嘉義市</option>
+                          <option value="台南市">台南市</option>
+                          <option selected value="高雄市">高雄市</option>
                         </select>
+                         <span v-show="errors.has('城市')" class="tooltip-text left" 
+                          :class="{'is-invalid':errors.has('城市')}">
+                         {{ errors.first('城市') }}
+                        </span>
                       </div>
-                      <div class="col-6">
-                        <select>
-                          <option value="volvo">新興區</option>
-                          <option value="saab">彌陀區</option>
-                          <option value="mercedes">岡山區</option>
-                          <option value="audi">三民區</option>
+                      <div class="col-6 validate-tooltip">
+                        <select v-model="from.invoice.area" name="區域" v-validate="'required'" v-if="invoiceName == 'Mailing'">
+                          <option value="">請選擇</option>
+                          <option value="新興區">新興區</option>
+                          <option value="彌陀區">彌陀區</option>
+                          <option value="岡山區">岡山區</option>
+                          <option value="三民區">三民區</option>
                         </select>
+                         <span v-show="errors.has('區域')" class="tooltip-text right" 
+                          :class="{'is-invalid':errors.has('區域')}">
+                         {{ errors.first('區域') }}
+                        </span>
                       </div>        
                     </div>     
-                    <div class="form-row">
-                      <input type="" name="" value="" placeholder="幸福路 520 號">
+                    <div class="form-row validate-tooltip">
+                      <input type="text" name="地址" v-validate="'required'" v-if="invoiceName == 'Mailing'"  v-model="from.invoice.address" placeholder="幸福路 520 號">
+                       <span v-show="errors.has('地址')" class="tooltip-text left" 
+                       :class="{'is-invalid':errors.has('地址')}">
+                    {{ errors.first('地址') }}
+                    </span>
                     </div>
                 </div>
-                <div class="electronic"  :class="{'active':invoiceName == 'electronic'}">
+                <div class="electronic" v-if="invoiceName == 'electronic'" :class="{'active':invoiceName == 'electronic'}">
                     <label for="">電子郵件信箱</label>
-                    <div class="form-row">
-                        <input type="" name="" value="" placeholder="example@email.com">
+                    <div class="form-row validate-tooltip">
+                        <input type="text" name="電子郵件" v-if="invoiceName == 'electronic'" v-validate="'required|email'" data-vv-as="email" v-model="from.invoice.email" placeholder="example@email.com">
+                         <span v-show="errors.has('電子郵件')" class="tooltip-text left" 
+                          :class="{'is-invalid':errors.has('電子郵件')}">
+                         {{ errors.first('電子郵件') }}
+                        </span>
                       </div>
                 </div>
                 <label for="">統一編號（選填）</label>  
-                  <div class="form-row">
-                    <input type="" name="" value="" placeholder="12345678">
+                  <div class="form-row validate-tooltip">
+                    <input name="統一編號"  placeholder="12345678"
+                      v-model="from.invoice.taxId" v-validate="'required|length:8|numeric'"  
+                      
+                      >
+                     <span v-show="errors.has('統一編號')" class="tooltip-text left" 
+                          :class="{'is-invalid':errors.has('統一編號')}">
+                         {{ errors.first('統一編號') }}
+                        </span>
                   </div>
             </form>
         </div>
         <div class="checkout-footer">
-  
-            <nuxt-link  to="/checkout/checkoutEnd">確認結帳</nuxt-link>
+            <a href="" @click.prevent="validateBeforeSubmit">確認結帳</a>
+            <!-- <nuxt-link  to="/checkout/checkoutEnd">確認結帳</nuxt-link> -->
          
           </div> 
       </div>
@@ -115,6 +140,8 @@ export default {
     return{
       from:{
        invoice:{
+         county:'',
+         area:''
         }
       },
       invoiceName:'electronic'
@@ -124,13 +151,32 @@ export default {
     validateBeforeSubmit() {
        const vm = this;
       this.$validator.validateAll().then((result) => {
+       
+        
+
         if (result) {
           // eslint-disable-next-line          
-          alert('Form Submitted!');
+          this.$toast.success('填寫成功!!', { 
+              position: "top-center", 
+              theme: "outline",   
+              duration : 3000,
+               icon : {
+                name : 'check',
+                after : false // this will append the icon to the end of content
+               }
+            });
            vm.$router.push('/checkout/checkoutEnd');
           return;
         }
-        alert('Correct them errors!');
+       this.$toast.error('請填入資訊!!', { 
+              position: "top-center", 
+	            theme: "outline", 	         
+              duration : 2000,            
+              icon : {
+                name : 'error',
+                after : false // this will append the icon to the end of content
+               }
+            });
       });
     }
   },

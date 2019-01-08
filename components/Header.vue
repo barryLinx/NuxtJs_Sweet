@@ -2,32 +2,38 @@
    <header>
         <h1>
           <!-- <img src="./image/logo-all-dark.png" alt=""> -->
-          <nuxt-link class="logo" style="background-image: url('./image/logo-all-dark.png');" to="/">首页</nuxt-link>
-            <nuxt-link class="screen-576" style="background-image: url('./image/logotype-sm-dark.svg');" to="/">首页</nuxt-link>
+          <div  @click="routeclick('index')">
+            <nuxt-link class="logo" style="background-image: url('./image/logo-all-dark.png');"  to="/">首頁</nuxt-link>
+          </div>
+         
+         <div @click="routeclick('index')">
+  <nuxt-link class="screen-576" style="background-image: url('./image/logotype-sm-dark.svg');"  @click="routeclick('index')" to="/">首頁</nuxt-link>
+         </div>
+          
           <!-- <a href="sweet.html" style="background-image: url('./image/logo-all-dark.png');" class="logo" ></a>
           <a class="screen-576"  href="sweet.html" style="background-image: url('./image/logotype-sm-dark.svg');"></a> -->
 <!-- v-for="(item, index) in navitem" :key="index" {{item}} {{routeName}}{{index}}-->
         </h1>
           <ul>
-            <li  class="nav-item " @click="routeclick('index')"  :class="{'active':'index' == routeName}">
+            <li  class="nav-item " @click="routeclick('index')" :class="{'active':'index' == routeName}" >
+              <!--  :class="{'active':'index' == routeName}" -->
                <nuxt-link to="/">首頁</nuxt-link>
              
               </li>
-            <li class="nav-item" @click="routeclick('product')" :class="{'active': 'product' == routeName}">
+            <li class="nav-item" @click="routeclick('product')" >
              
               <nuxt-link to="/product">甜點</nuxt-link>
             </li>
-            <li class="nav-item" @click="routeclick('login')" :class="{'active': 'login' == routeName}">
+            <li class="nav-item" @click="routeclick('login')" >
              
                <nuxt-link to="/login">登入</nuxt-link>
             </li>
           </ul>                    
        
         <div class="cart"  @click="routeclick('cart')">
-          <nuxt-link to="/cart"><i class="fas fa-shopping-cart"></i>
-          {{vxCart.length }}
+          <nuxt-link to="/cart"><i class="fas fa-shopping-cart"></i>        
           </nuxt-link>
-         
+           {{vxCart.length }}
         </div>
         <div class="menu-btn" @click="showMenu" :class="{'close':show}">
           <div class="btn-line" ></div>
@@ -58,7 +64,7 @@ import { mapState,mapMutations,mapActions,mapGetters } from 'vuex';
     data(){
       return{
        // navitem:['index','product','login'],
-        routeName:'index',
+        routeName:'',
         show:false,
         BowerCart:[],
       }

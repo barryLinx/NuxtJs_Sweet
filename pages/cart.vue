@@ -54,7 +54,7 @@
             <span>總計</span>
             <span>NT$ 3,000</span>
           </div> -->
-          <nuxt-link :to="{ name: 'checkout', params: { id: 123 }}"> 結帳</nuxt-link>
+          <nuxt-link :to="{ name: 'checkout'}"> 結帳</nuxt-link>
          
        </div>
 
