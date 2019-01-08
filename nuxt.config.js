@@ -1,10 +1,10 @@
 const pkg = require('./package')
 
-// const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
-//   router: {
-//     base: '/NuxtJs_Sweet/'
-//   }
-// } : {}
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/Text_Nuxt_sweet/'
+  }
+} : {}
 
 module.exports = {
   mode: 'universal',
@@ -70,6 +70,9 @@ module.exports = {
     iconPack : 'material'
   },
 
+
+  ...routerBase,
+
   /*
   ** Build configuration
   */
@@ -82,8 +85,8 @@ module.exports = {
     extend(config, ctx) {
       
     }
-  },
+  }
 
-  //...routerBase
+  
   
 }
