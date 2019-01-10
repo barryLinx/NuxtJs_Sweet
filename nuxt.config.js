@@ -17,13 +17,15 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: pkg.description },
+    
     ],
     link: [     
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: "stylesheet", href: "https://use.fontawesome.com/releases/v5.4.1/css/all.css" ,integrity:"sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" ,crossorigin: "anonymous"},
       { rel: "stylesheet" ,href:"https://fonts.googleapis.com/icon?family=Material+Icons"  }
-    ]
+    ],
+    // {Content-Security-Policy: upgrade-insecure-requests}
   },
 
   /*

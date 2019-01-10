@@ -90,52 +90,16 @@
       </div>
     
       <div class="Summary-list">
-        <div class="order-info">
-          <h3>訂單摘要</h3>
-          <div class="order-body">
-            <div>
-                 <span>小計</span>
-                 <span>NT$ 2,700</span>
-            </div>
-            <div>
-                <span>運費</span>
-                <span>NT$ 300</span>
-            </div>
-          </div>
-          <div class="order-footer">
-               <span>總計</span>
-               <span>NT$ 3,000</span>
-          </div>
-        </div>
-        <div class="cart-list">
-          <h3>購物清單</h3>
-          <div class="cart-card">
-            <div class="img" style="background-image: url(~static/image/prod1.jpg)"></div>
-            <div class="">
-              <p>焦糖馬卡龍（2 )<p>
-                <p>NT$ 900</p>
-            </div>
-          </div>
-          <div class="cart-card">
-            <div class="img" style="background-image: url(~static/image/prod4.jpg)"></div>
-            <div >
-              <p>焦糖馬卡龍（2 )<p>
-              <p>NT$ 900</p>
-            </div>
-          </div>
-          <div class="cart-card">
-            <div class="img" style="background-image: url(~static/image/prod3.jpg)"></div>
-            <div class="">
-              <p>焦糖馬卡龍（2 )<p>
-                <p>NT$ 900</p>
-            </div>
-          </div>
-        </div>
+         <summarylist />
       </div>
     </section>
 </template>
 <script>
+import summarylist from '~/components/SummaryList.vue'
 export default {
+  components:{
+    summarylist
+  },
    data(){
     return{
       from:{

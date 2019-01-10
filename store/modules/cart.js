@@ -2,77 +2,11 @@
 // initial state
 // shape: [{ id, quantity }]
 const state = {
-  vxCart:[],
-  Alldata:[
-    { id: 1, title: '頻果派', price: 450, imgname: 'prod1', tag: 'Today' },
-        {
-          id: 2,
-          title: '藍梅派',
-          price: 950,
-          imgname: 'prod2',
-          tag: 'recommend'
-        },
-        {
-          id: 3,
-          title: '焦糖馬卡籠',
-          price: 650,
-          imgname: 'prod3',
-          tag: 'newProduct'
-        },
-        { id: 4, title: '水果優格', price: 800, imgname: 'prod4', tag: 'recommend' },
-        { id: 5, title: '葡萄蛋糕', price: 700, imgname: 'prod5', tag: '' },
-        { id: 6, title: '頻果派', price: 450, imgname: 'prod1', tag: 'Today' },
-        {
-          id: 7,
-          title: '藍梅派',
-          price: 950,
-          imgname: 'prod2',
-          tag: 'recommend'
-        },
-        {
-          id: 8,
-          title: '焦糖馬卡籠',
-          price: 650,
-          imgname: 'prod3',
-          tag: 'newProduct'
-        },
-        { id: 9, title: '水果優格', price: 800, imgname: 'prod4', tag: '' },
-        { id: 10, title: '葡萄蛋糕', price: 700, imgname: 'prod5', tag: '' },
-        { id: 11, title: '頻果派', price: 450, imgname: 'prod2', tag: 'Today' },
-        {
-          id: 12,
-          title: '藍梅派',
-          price: 950,
-          imgname: 'prod2',
-          tag: 'recommend'
-        },
-        {
-          id: 13,
-          title: '焦糖馬卡籠',
-          price: 650,
-          imgname: 'prod3',
-          tag: 'newProduct'
-        },
-        { id: 14, title: '水果優格', price: 800, imgname: 'prod2', tag: 'recommend' },
-        { id: 15, title: '葡萄蛋糕', price: 700, imgname: 'prod5', tag: '' },
-        { id: 16, title: '頻果派', price: 450, imgname: 'prod5', tag: 'Today' },
-        {
-          id: 17,
-          title: '藍梅派',
-          price: 950,
-          imgname: 'prod5',
-          tag: 'recommend'
-        },
-        {
-          id: 18,
-          title: '焦糖馬卡籠',
-          price: 650,
-          imgname: 'prod5',
-          tag: 'newProduct'
-        },
-        { id: 19, title: '水果優格', price: 800, imgname: 'prod5', tag: '' },
-        { id: 20, title: '葡萄蛋糕', price: 700, imgname: 'prod5', tag: '' }
-  ],
+  vxCart:[],//1筆1筆的資料(obj)
+  vxOrderSummary:{},
+  vxCartList:[],// 有計算過後
+  temporaryCartData:[] ,
+  
 }
 
 // actions
@@ -89,9 +23,15 @@ const actions = {
   allremoveCartItemAction(context,status){
     console.log('status',status);
     context.commit('AllRemoveCartItem',status);
+  },
+  setvxOrderSummary(context,status){
+    context.commit('SetvxOrderSummary',status);
+  },
+  setvxCartList(context,status){
+    context.commit('SetvxCartList',status);
   }
 }
-// mutations
+// mutationsb
 const mutations = {
   InitClientCart(state,payload){
     state.vxCart = payload;
@@ -112,14 +52,54 @@ const mutations = {
      // console.log('state_vxCart',state.vxCart.length);      
     };
   },
-
+  SetvxCartList(state,payload){
+    console.log('SetvxCartList',payload);
+    state.vxCartList = payload;
+  },
+  SetvxOrderSummary(state,payload){
+    //console.log('vxOrderSummary',payload);
+    state.vxOrderSummary = payload;
+    console.log('state_vxOrderSummary', state.vxOrderSummary);
+  }
+  
 }
 
 // getters
-const getters = {
-  CalcCart(state){
-    return state.vxCart;
+const getters = {  
+  CalcCartItem(state){
+    let newData = []; 
+    //groupby objects in an array
+    let data = state.vxCart.reduce(function (acc, obj) {
+      let key = obj['id'];
+      //console.log('key',key);
+       if (!acc[key]) {        
+          acc[key] = [];
+        }
+        acc[key].push( obj);
+        return acc;
+     }, {});
+   // 加入 數量len
+   Object.keys(data).forEach(function(key) {
+       let newObj =  Object.assign({}, data[key][0]); // Do not mutate vuex store state outside mutation handlers 避免參考錯誤
+        newObj['len'] = data[key].length;
+        newObj['subtotal'] =  newObj['len'] *  newObj['price']; //小計
+      //  console.log('newObj' ,newObj);
+        newData.push(newObj);
+     }); 
+       //this.cartData = newData;
+    return newData;
+  },
+  Calctotalsubtotal(state,getters ){
+    const TolSub = getters.CalcCartItem.reduce((acc,cuu, currentIndex, array)=>{    
+        return  cuu.subtotal + acc;
+     },0);
+     let buy = {};
+     buy.subtotal = TolSub;
+     buy.tran = 300;
+     buy.Total =   buy.subtotal + buy.tran;
+    return buy;
   }
+
 }
 
 

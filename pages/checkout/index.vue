@@ -92,7 +92,8 @@
         </div>
          
         <div class=" Summary-list">
-            <div class="order-info">
+          <summarylist />
+            <!-- <div class="order-info">
               <h3>訂單摘要</h3>
               <div class="order-body">
                 <div>
@@ -133,12 +134,17 @@
                 </div>
               </div>
             </div>
+        </div> -->
         </div>
       </section>   
 </template>
 
 <script>
+import summarylist from '~/components/SummaryList.vue'
 export default {
+    components:{
+    summarylist
+  },
   data(){
     return{
       from:{

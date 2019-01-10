@@ -136,51 +136,55 @@ export default {
     }   
  }, 
  computed:{
-   ...mapState('cartModules',['vxCart']),   
-   calcTotal(){
-     const vm = this;
-     vm.cartData;
-     return;
-   },
+   ...mapState('cartModules',['vxCart','vxCartList','vxOrderSummary']),   
+  //  calcTotal(){
+  //    const vm = this;
+  //    vm.cartData;
+  //    return;
+  //  },
    cartItem(){
-     let newData = [];    
-   //groupby objects in an array
-    //console.log('vxCart',this.vxCart);
-    let data = this.vxCart.reduce(function (acc, obj) {
-      let key = obj['id'];
-      //console.log('key',key);
-       if (!acc[key]) {        
-          acc[key] = [];
-        }
-        acc[key].push( obj);
-        return acc;
-     }, {});
-   // 加入 數量len
-   Object.keys(data).forEach(function(key) {
-       let newObj =  Object.assign({}, data[key][0]); // Do not mutate vuex store state outside mutation handlers 避免參考錯誤
-        newObj['len'] = data[key].length;
-        newObj['subtotal'] =  newObj['len'] *  newObj['price']; //小計
-      //  console.log('newObj' ,newObj);
-        newData.push(newObj);
-     }); 
-      this.cartData = newData;
-    //console.log('calcdata',data);
-     return newData;
+     return this.$store.getters['cartModules/CalcCartItem'];
+
+  //    let newData = [];    
+  //  //groupby objects in an array
+  //   //console.log('vxCart',this.vxCart);
+  //   let data = this.vxCart.reduce(function (acc, obj) {
+  //     let key = obj['id'];
+  //     //console.log('key',key);
+  //      if (!acc[key]) {        
+  //         acc[key] = [];
+  //       }
+  //       acc[key].push( obj);
+  //       return acc;
+  //    }, {});
+  //  // 加入 數量len
+  //  Object.keys(data).forEach(function(key) {
+  //      let newObj =  Object.assign({}, data[key][0]); // Do not mutate vuex store state outside mutation handlers 避免參考錯誤
+  //       newObj['len'] = data[key].length;
+  //       newObj['subtotal'] =  newObj['len'] *  newObj['price']; //小計
+  //     //  console.log('newObj' ,newObj);
+  //       newData.push(newObj);
+  //    }); 
+  //      this.cartData = newData;
+  //      this.$store.dispatch('cartModules/setvxCartList',newData);     
+  //      console.log('vxCartList',this.vxCartList);
+  //    return newData;
    },
    totalsubtotal(){
-     const TolSub = this.cartData.reduce((acc,cuu, currentIndex, array)=>{    
-          return  cuu.subtotal + acc;
-       },0);
-       let buy = {};
-       buy.subtotal = TolSub;
-       buy.tran = 300;
-       buy.Total =   buy.subtotal + buy.tran;
-      //console.log('TolSub',TolSub); 
-       return buy;
-   },
-   Total(){
+     return this.$store.getters['cartModules/Calctotalsubtotal'];
+    //  const TolSub = this.cartData.reduce((acc,cuu, currentIndex, array)=>{    
+    //       return  cuu.subtotal + acc;
+    //    },0);
+    //    let buy = {};
+    //    buy.subtotal = TolSub;
+    //    buy.tran = 300;
+    //    buy.Total =   buy.subtotal + buy.tran;
 
-   }
+    //     this.$store.dispatch('cartModules/setvxOrderSummary', Object.assign({},buy)); 
+    //    console.log('vxOrderSummary',this.vxOrderSummary); 
+    //    return buy;
+   },
+   
   //  trydata(){
   //    let trydd = [];
   //    const cartitem = new Set([1,3,2,4,4,4,4,4,2,2,2]); // [1,3,2,4,4,4,4,4,2,2,2]
