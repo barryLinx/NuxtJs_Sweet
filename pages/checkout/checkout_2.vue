@@ -16,16 +16,20 @@
                 <div class="form-row ">
                   <div class="col-12 validate-tooltip">
                     <label for="信用卡">信用卡卡號</label>
-                    <input name="信用卡"  placeholder="格式: 9012-3456-7890-1234"
-                     v-model="from.payway.credit" 
-                     v-validate="{required, regex: /\d{4}-\d{4}-\d{4}-\d{4}$/ }" 
-                     data-vv-validate-on="change|blur"
-                     
-                    >
-                     <span v-show="errors.has('信用卡')" class="tooltip-text left" 
-                       :class="{'is-invalid':errors.has('信用卡')}">
-                    {{ errors.first('信用卡') }}
-                    </span>
+                     <div class="credit-input validate-tooltip">
+                       <input name="信用卡"  placeholder="格式: 9012-3456-7890-1234"
+                          v-model="from.payway.credit" 
+                          v-validate="{required, regex: /\d{4}-\d{4}-\d{4}-\d{4}$/ }" 
+                          data-vv-validate-on="change|blur"
+                         >
+                         <div>
+                           <i class="far fa-credit-card"></i>
+                         </div>
+                        <span v-show="errors.has('信用卡')" class="tooltip-text left" 
+                          :class="{'is-invalid':errors.has('信用卡')}">
+                           {{ errors.first('信用卡') }}
+                          </span>
+                    </div>
                   </div>
                 </div>
                 <label for="">持卡人姓名</label>
