@@ -1,5 +1,5 @@
 <template>
-  <section class="cart-page" :class="{'cart-empty':cartData.length < 2 }" >
+  <section class="cart-page" :class="{'cart-empty': cartData <= 1 }" >
       <div class="cart-currently">
           <h3>您的購物車</h3>
           <ul class="cart">
@@ -54,7 +54,8 @@
             <span>總計</span>
             <span>NT$ 3,000</span>
           </div> -->
-          <nuxt-link :to="{ name: 'checkout'}"> 結帳</nuxt-link>
+          <a @click.prevent="gotoPay">結帳</a>
+          <!-- <nuxt-link :to="{ name: 'checkout'}"> 結帳</nuxt-link> -->
          
        </div>
 
@@ -66,7 +67,7 @@ import { mapState,mapMutations,mapActions,mapGetters } from 'vuex';
 export default {
   data(){
     return{
-      cartData:[],
+      cartData:0,
       //cartEmpty:false    
    }
  },
@@ -77,6 +78,23 @@ export default {
 
  },
  methods: {
+   gotoPay(){
+     console.log('this.vxCart.length',this.vxCart.length);
+     if( this.vxCart.length == 0 ){
+      this.$toast.info('購車車是空的!!', { 
+              position: "top-center", 
+	            theme: "outline", 	         
+              duration : 2000,            
+              icon : {
+                name : 'error',
+                after : false // this will append the icon to the end of content
+               }
+            });
+            return;
+     }
+      this.$router.push('/checkout');
+
+   },
  accCartData(){   
      
   //    let newData = [];    
@@ -143,6 +161,8 @@ export default {
   //    return;
   //  },
    cartItem(){
+      this.cartData = this.$store.getters['cartModules/CalcCartItem'].length;
+
      return this.$store.getters['cartModules/CalcCartItem'];
 
   //    let newData = [];    
