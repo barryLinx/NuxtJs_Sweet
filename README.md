@@ -20,3 +20,5 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+## 樣板CSS
+- [ CSS 來源](https://github.com/barryLinx/T2EWeek/tree/master/week2)
